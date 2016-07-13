@@ -1,3 +1,32 @@
 ---
 
+backend_servers:
+  - name: app1
+    address: 192.168.0.121:80
+  - name: app2
+    address: 192.168.0.122:80
+
 ntp_timezone: America/Chicago
+
+php_use_managed_ini: true
+php_display_errors: "On"
+php_webserver_daemon: nginx
+php_enable_php_fpm: true
+php_enablerepo: remi-php70
+php_packages:
+  - php
+  - php-cli
+  - php-common
+  - php-devel
+  - php-gd
+  - php-imap
+  - php-ldap
+  - php-mbstring
+  - php-pdo
+  - php-pear
+  - php-xml
+  - php-xmlrpc
+  - php-fpm
+  - php-mcrypt
+  - php-mysql
+  - php-zip

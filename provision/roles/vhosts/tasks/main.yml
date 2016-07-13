@@ -1,0 +1,13 @@
+---
+
+- block:
+  - name: Adding vhost config
+    template:
+      src: vhost.conf.j2
+      dest: "/etc/nginx/conf.d/{{ item.url }}.conf"
+      mode: 0644
+      owner: root
+      group: root
+    with_items: vhosts
+    notify:
+      - Reload Nginx

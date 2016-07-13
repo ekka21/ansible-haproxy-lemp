@@ -1,0 +1,7 @@
+---
+
+vhosts:
+
+    - url: local.app1
+      path: /var/www/domains/myapp
+      web_root: public

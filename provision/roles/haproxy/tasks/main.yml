@@ -1,0 +1,21 @@
+---
+
+  - name: Install HAProxy and its dependency
+    yum: name={{ item }} state=present
+    with_items:
+      - haproxy
+      - openssl-devel
+
+  - name: Configuring HAProxy Global Settings
+    template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg mode=644
+    notify: Restart haproxy
+
+  - name: Configure HAProxy logs
+    template: src=rsyslog.conf.j2 dest=/etc/rsyslog.conf mode=644
+
+  - name: Create haproxy.conf for syslog
+    template: src=rsyslog-haproxy.conf.j2 dest=/etc/rsyslog.d/haproxy.conf mode=644
+    notify: Restart rsyslog
+
+  
+  # - name: Open HAProxy Ports on Firewall

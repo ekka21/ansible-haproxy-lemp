@@ -1,0 +1,13 @@
+tasks:
+    
+    - name: Ensure user is exist
+      user: name=nginx shell=no createhome=no
+    
+    - name: Ensure app directory exists and is writeable
+      file: path=/var/www/domains state=directory owner=nginx group=nginx mode=0755
+
+    - name: Clone web app
+      git: repo=git@github.com:ekka21/iamdoingit.xyz.git dest=/var/www/domains/iamdoingit.xyz accept_hostkey=yes force=yes
+
+    - name: Ensure demo application has correct user for files.
+      file: path=/var/www/domains/iamdoingit.xyz owner=nginx group=nginx recurse=yes    

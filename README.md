@@ -1,13 +1,28 @@
-# Lemp Highly-Available Infrastructure
+# LEMP Stack + HAProxy infrastructure
+
+- Requires Ansible v2.0.x
+- Expects CentOS/RHEL 7 hosts
 
 The goal is to create an immutable and scalable infrastructure(AKA Horizontal Scalability!) with Ansible. The idea is that I want to be able to provision my remote servers(Vagrant/Cloud) from my Mac.
 
 ## Infrastructure
+
+
 - Load Balancer (HaProxy)
 - Database (MariaDB)
-- App1, App2, App3... (Nginx, PHP7)
+- App1, App2 (Nginx, PHP7)
 
-## Spin up VMs using Vagrant
+I will install and configure a Nginx web server with HAProxy Load Balancer in front, and deploy a PHP web application to web servers.
+```
+192.168.0.100 lb
+192.168.0.110 db
+192.168.0.121 app1
+192.168.0.122 app2
+```
+
+
+
+## Vagrant
 
 What I'm trying to do is to spin up multiple virtual machines and can ssh into each boxes with the same ssh-key on my Mac. The trick here is that Vagrant as of v1.7.3 will automatically generate ssh-key pairs for each VMs and insert them into each box. So you'll have to add `config.ssh.insert_key = false` in `Vagrantfile`. After that Vagrant will use `~/.vagrand.d/insecure_private_key` instead. 
 
@@ -49,7 +64,7 @@ You are golden!
 *The range of ip-addresses are 192.168.[0-255].[0.255]. Don't be like me and try to create a VM and couldn't ssh into. It was because I was trying to create 192.168.0.301 and 192.168.0.302. You're welcome, I just save 10 minutes of your life!.*
 
 
-# Using Anible as a provisioner
+# Ansible as a provisoner
 
 First, let's make sure that we can ping our Vms `cd provision && ansible all -m ping && cd -`, you should get something like
 ```
