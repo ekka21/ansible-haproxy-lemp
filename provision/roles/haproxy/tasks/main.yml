@@ -8,14 +8,14 @@
 
   - name: Configuring HAProxy Global Settings
     template: src=haproxy.cfg.j2 dest=/etc/haproxy/haproxy.cfg mode=644
-    notify: Restart haproxy
+    notify: restart haproxy
+  
+  - name: Ensure HAProxy is started and enabled on boot.
+    service: name=haproxy state=started enabled=yes
 
   - name: Configure HAProxy logs
     template: src=rsyslog.conf.j2 dest=/etc/rsyslog.conf mode=644
 
   - name: Create haproxy.conf for syslog
     template: src=rsyslog-haproxy.conf.j2 dest=/etc/rsyslog.d/haproxy.conf mode=644
-    notify: Restart rsyslog
-
-  
-  # - name: Open HAProxy Ports on Firewall
+    notify: restart rsyslog

@@ -46,15 +46,15 @@ frontend main
     option forwardfor
     stats enable
     stats show-legends
-    stats refresh 5s
-    stats uri /stats                             #URL for HAProxy monitoring
+    stats refresh {{ haproxy_stats_refresh }}
+    stats uri /{{ haproxy_stats_url }}                     
     stats realm Haproxy\ Statistics
-    stats auth admin:admin            #User and Password for login to the monitoring dashboard
+    stats auth {{ haproxy_stats_user }}:{{ haproxy_stats_password}}    
     stats admin if TRUE
-    default_backend app-main
+    default_backend {{ haproxy_backend_name }}
 
-backend app-main
-    balance roundrobin
+backend {{ haproxy_backend_name }}
+    balance {{ haproxy_backend_balance_method }}
     option httpchk HEAD / HTTP/1.1\r\nHost:\ localhost
 {% for backend in backend_servers %}
     server {{ backend.name }} {{ backend.address }} check
