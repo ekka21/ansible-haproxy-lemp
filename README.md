@@ -14,17 +14,17 @@ The goal is to create an immutable and scalable infrastructure(AKA Horizontal Sc
 
 I will install and configure a Nginx web server with HAProxy Load Balancer in front, and deploy a PHP web application to web servers.
 ```
-192.168.0.100 lb
-192.168.0.110 db
-192.168.0.121 app1
-192.168.0.122 app2
+192.168.0.10 lb
+192.168.0.11 db
+192.168.0.21 app1
+192.168.0.22 app2
 ```
 
 
 
 ## Vagrant
 
-What I'm trying to do is to spin up multiple virtual machines and can ssh into each boxes with the same ssh-key on my Mac. The trick here is that Vagrant as of v1.7.3 will automatically generate ssh-key pairs for each VMs and insert them into each box. So you'll have to add `config.ssh.insert_key = false` in `Vagrantfile`. After that Vagrant will use `~/.vagrand.d/insecure_private_key` instead. 
+What I'm trying to do is to spin up multiple virtual machines and can ssh into each boxes with the same ssh-key on my Mac. The trick here is that Vagrant as of v1.7.3 will automatically generate ssh-key pairs for each VMs and insert them into each box. So you'll have to add `config.ssh.insert_key = false` in `Vagrantfile`. After that Vagrant will use `~/.vagrand.d/insecure_private_key` instead.
 
 Now you should be able to ssh like this `ssh -i ~/.vagrant.d/insecure_private_key vagrant@IP-ADDRESS`. You can add that as an bash alias if you are lazy like me but I like to take it even further because I want to connect to my VMs like this`ssh lb` or `ssh db` or `ssh app1` or `ssh app2`
 
