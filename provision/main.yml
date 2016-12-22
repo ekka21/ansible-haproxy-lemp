@@ -26,7 +26,6 @@
     - { role: geerlingguy.php, tags: php }
     - { role: geerlingguy.composer, tags: composer }
 
-
 #Database
 # - hosts: db
 # become: yes

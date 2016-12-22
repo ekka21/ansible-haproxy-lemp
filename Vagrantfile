@@ -11,7 +11,7 @@ Vagrant.configure("2") do |config|
   config.vm.define :lb do |lb|
       lb.vm.box = "geerlingguy/centos7"
       lb.vm.hostname = "lb"
-      lb.vm.network a"private_network", ip: "192.168.0.10"
+      lb.vm.network "private_network", ip: "192.168.0.10"
       lb.vm.network "forwarded_port", guest: "80", host: "8080"
       lb.vm.provider "virtualbox" do |vb|
         vb.memory = "512"
